@@ -110,7 +110,8 @@ export default function App() {
               onChange={(event) => setNoteInput(event.target.value)}
             ></textarea>
             <input type="file" onChange={(e) => handleChange(e)} />
-            <img src={file} />
+            {console.log(file)}
+            <img src={file.file} />
             <button>Create Note</button>
           </form>
         </div>
