@@ -1,17 +1,21 @@
 .app {
   padding: 50px;
-  height: 100vh;
+}
+
+.app1 {
+  padding-top: 20px;
+  padding-right: 20px;
   background: radial-gradient(
     63.33% 152.22% at -0.66% 1.07%,
     #4b29aa 0%,
     #090d24 100%
   );
-  background-size: cover;
+  background-size: contain;
 }
 
 h1 {
   color: white;
-  text-align: right;
+  text-align: center;
 }
 h1 > span {
   display: block;
@@ -25,7 +29,7 @@ h1 > span {
   display: flex;
   flex-direction: column;
 
-  width: 200px;
+  width: 400px;
 }
 
 .note-form > textarea {
