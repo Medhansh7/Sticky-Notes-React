@@ -41,6 +41,14 @@ const notesReducer = (prevState, action) => {
 export default function App() {
   const [notesState, dispatch] = useReducer(notesReducer, initialNotesState);
   const [noteInput, setNoteInput] = useState("");
+  const [file, setfile] = useState([]);
+
+  let handleChange = (e) => {
+    console.log(e);
+    setfile({
+      file: URL.createObjectURL(e.target.files[0]),
+    });
+  };
 
   const addNote = (event) => {
     event.preventDefault();
@@ -52,10 +60,12 @@ export default function App() {
       id: uuid(),
       text: noteInput,
       rotate: Math.floor(Math.random() * 20),
+      image: file,
     };
 
     dispatch({ type: "ADD_NOTE", payload: newNote });
     setNoteInput("");
+    setfile([]);
   };
 
   const dragOver = (event) => {
@@ -99,6 +109,8 @@ export default function App() {
               value={noteInput}
               onChange={(event) => setNoteInput(event.target.value)}
             ></textarea>
+            <input type="file" onChange={(e) => handleChange(e)} />
+            <img src={file} />
             <button>Create Note</button>
           </form>
         </div>
@@ -133,6 +145,7 @@ export default function App() {
               draggable="true"
               key={note.id}
             >
+              {console.log(note)}
               <div
                 onClick={() => dispatch({ type: "DELETE_NOTE", payload: note })}
                 className="close"
@@ -150,7 +163,13 @@ export default function App() {
                   />
                 </svg>
               </div>
-
+              {note.image.length != 0 ? (
+                <img
+                  style={{ height: "90px", width: "145px" }}
+                  src={note.image.file}
+                  alt=""
+                />
+              ) : null}
               <pre className="text">{note.text}</pre>
             </div>
           ))}
